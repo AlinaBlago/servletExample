@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @WebServlet(name = "sample-servlet", urlPatterns = "/sample")
 public class SampleServlet extends HttpServlet {
 
-     ConcurrentHashMap<String, String> values = new ConcurrentHashMap<>();
+    ConcurrentHashMap<String, String> values = new ConcurrentHashMap<>();
 
     private static final Logger log = LoggerFactory.getLogger(SampleServlet.class);
 
@@ -26,15 +26,13 @@ public class SampleServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter responseBody = resp.getWriter();
         String ip = req.getRemoteAddr();
         values.put(ip, req.getHeader("User-agent"));
         resp.setContentType("text/html");
         responseBody.println("<h3 align=\"center\">Request from: " + req.getRemoteHost() + "</h3>");
-        responseBody.println(builder(ip));
-
+        responseBody.println(build(ip));
 
     }
 
@@ -43,7 +41,7 @@ public class SampleServlet extends HttpServlet {
         log.info("Sample Servlet destroyed");
     }
 
-    String builder(String ip){
+    String build(String ip){
         StringBuilder builder = new StringBuilder();
         builder.append("<ul>");
 
